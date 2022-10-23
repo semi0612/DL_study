@@ -1,0 +1,51 @@
+위키북스의 '파이썬 머신러닝 완벅 가이드' 개정 2판으로 공부하고 있습니다. 실습 과정과 이해에 따라 내용의 누락 및 코드의 변형이 있을 수 있습니다.
+
+----
+
+## LDA(Linear Discriminant Analysis)
+선형 판별 분석법으로 불리며 PCA와 매우 유사하지만 비지도 학습인 PCA와는 다르게 LDA는 지도학습이다. 분류에서 사용하기 쉽도록 개별 클래스를 분별할 수 있는 기준을 최대한 유지하면서 차원을 유지한다
+- PCA : 입력데이터의 변동성이 가장 큰 축을 찾는다. 공분산 행렬을 사용
+- LDA : 입력데이터의 결정 값 클래스를 최대한 분리할 수 있는 축을 찾는다. 클래스 간 분산, 클래스 내 분산 행렬을 사용
+
+즉, LDA는 클래스 분리를 최대화 하는 축을 찾기 위해 클래스간 분산은 최대화하고, 클래스 내 분산은 최소화한다.
+
+### LDA 수행과정
+1. 클래스 내부와 클래스 간 분산 행렬을 계산한다. 두 행렬은 입력 데이터의 결정값 클래스 별로 개별 피처의 평균 벡터를 기반하여 구한다.
+2. 클래스 내부 분산 행렬을 Sw, 클래스간 분산을 SB라 하면 아래와 같이 표현 가능하다.
+![](https://velog.velcdn.com/images/cyhse7/post/ecd5a890-ca50-4dea-bb21-12ede1e86a69/image.png)
+3. 고유값이 가장 큰 순으로 K개(LDA변환 차수)만큼 고유 벡터를 추출한다
+4. 고유값이 가장 큰 순으로 추출된 고유벡터를 이용하여 새롭게 입력 데이터를 변환한다.
+
+### 구현하며 이해하기
+사이킷 런은 LDA를 LinearDiscriminantAnalysis 클래스로 제공한다. 붓꼿 데이터 세트를 로드하여 진행해보겠다.
+```python
+# LDA
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import load_iris
+
+# 데이터 불러오고 변수에 할당하기
+iris = load_iris()
+X_feature = iris.data
+y_label = iris.target
+```
+StandardScaler()를 이용하여 스케일링
+```python
+# 표준 정규 분포로 스케일링
+scaled = StandardScaler()
+X_scaled = scaled.fit_transform(X_feature)
+```
+2개의 컴포넌트로 데이터를 LDA변환하려 한다. 이때 주의할 점은 LDA는 지도학습이기 때문에 클래스 결정값이 필요하다는 점이다.
+```python
+# 2개의 컴포넌트로 LDA 변환
+lda = LinearDiscriminantAnalysis(n_components=2)
+
+# PCA는 비지도 학습이지만 LDA는 지도 학습이다
+# 따라서 클래스 결정값이 변환시 필요하다
+# pca라면 [ pca.fit_transform(X_scaled) ]
+iris_lda = lda.fit_transform(X_scaled, y_label)
+print(iris_lda.shape)
+```
+```
+(150, 2)
+```
