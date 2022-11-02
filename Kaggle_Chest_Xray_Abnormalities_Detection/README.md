@@ -101,3 +101,6 @@ plt.imshow(img1_2, cmap = 'gray')
 ```
 ![image](https://user-images.githubusercontent.com/51469989/199439757-0b615d89-3458-4908-ab6f-0fb5afd324c5.png)
 
+
+------
+
