@@ -61,7 +61,7 @@ plt.imshow(img, cmap = plt.cm.bone)
 ```
 ![image](https://user-images.githubusercontent.com/51469989/199439391-5e58d302-2442-4016-9695-d2b7542b5d25.png)
 <br>
-이미지가 제대로 출력되었다. DICOM 파일을 처리하는 코드의 순서는 대략 아래와 같다고 한다.
+이미지가 제대로 출력되었다. DICOM 파일을 처리하는 코드의 순서는 대략 아래와 같다고 한다. <br>
 ![image](https://user-images.githubusercontent.com/51469989/199441346-ae831514-3d71-4640-8305-947b712e5d42.png)
 [출처 : DICOM 파일 읽는 법](https://ballentain.tistory.com/53)
 
