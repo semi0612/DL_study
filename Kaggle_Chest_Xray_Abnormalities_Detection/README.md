@@ -63,7 +63,7 @@ plt.imshow(img, cmap = plt.cm.bone)
 <br>
 이미지가 제대로 출력되었다. DICOM 파일을 처리하는 코드의 순서는 대략 아래와 같다고 한다. <br>
 ![image](https://user-images.githubusercontent.com/51469989/199441346-ae831514-3d71-4640-8305-947b712e5d42.png)
-[출처 : DICOM 파일 읽는 법](https://ballentain.tistory.com/53)
+<br>[출처 : DICOM 파일 읽는 법](https://ballentain.tistory.com/53)
 
 위와 같이 읽어서 출력하는 모습은 DICOM Viewer로 출력한 이미자와는 차이가 발생할 수 있기 때문에 꼭 `Rescale Slppe, WindowCenter`와 같은 속성을 적용해 주어야 한다고 한다. 미세한 차이라도 실제 이미지에 적용하였을 때의 오류와 오차를 최대한 줄여하 하기 때문으로 이해했다.
 ```python
