@@ -4,6 +4,7 @@
 
 
 ## cat_vs_dog(mini_dataset)
+https://github.com/semi0612/study/blob/main/Practice/cat_vs_dog(mini_dataset).ipynb
 ### 모델 7가지
 - 비교할 모델 7가지
   - VGG16, VGG19, Inception_v3(GoogleNet), ResNet, Xception, MobileNet, DenseNet
