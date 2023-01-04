@@ -1,5 +1,7 @@
 # 📃 장바구니 분석을 통한 재구매 물품 예측
 
+<img src="https://user-images.githubusercontent.com/51469989/210502490-5881ad58-4d8c-4fea-bfce-f6d04b565e89.png" width="60%">
+
 ## 자료구성
 - 분석대상(Analysis Target) : 2014년 ~ 2015년(2년간) L그룹 4개 계열사에서 구매한 고객 일부 발췌
 - 제공범위(Scope of Offer) : L그룹 4개 계열사의 구매이력(계열사 정보 비공개), 고객 성향을 파악할 수 있는 데이터 제공
