@@ -38,11 +38,11 @@
 ![image](https://user-images.githubusercontent.com/51469989/211734791-94dacbba-8638-44a5-8d5c-375f22b58072.png)<br>
 같은 상품을 반복 구매하는 횟수가 적은 고객의 전체 매출<br>
 ![image](https://user-images.githubusercontent.com/51469989/211738242-6a5da003-8a5c-4508-8efb-bff40e0d8e4d.png)<br>
-반복 구매 횟수가 적은 고객 과 많은 고객을 함게 그린 그래프
+반복 구매 횟수가 적은 고객 과 많은 고객을 함게 그린 그래프<br>
 <br>
-⋗ 그렇다면 같은 상품을 반복적으로 구매하는 것이 전체 매출에 중요한 영향을 끼치는지 확인
-
- 
+⋗ 그렇다면 같은 상품을 반복적으로 구매하는 것이 전체 매출에 중요한 영향을 끼치는지 확인<br>
+![image](https://user-images.githubusercontent.com/51469989/211768612-51047a41-df25-4336-86d7-f09621826df8.png)<br>
+전체 매출에서 
 
 <br>
 기존 고객들을 관리하면서 전체적인 매출 증대를 시킬 수 있는 방법이 뭐가 있을까 마케팅 기법을 찾아봤는데<br>
