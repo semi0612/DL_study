@@ -20,21 +20,34 @@
 
 # 02. 주제 선정
 ## EDA
-L사의 반기별 총 매출액 + 년도별 총 매출액 <br>
+⋗ L사의 반기별 총 매출액 + 년도별 총 매출액 <br>
 ![image](https://user-images.githubusercontent.com/51469989/211510762-4a79a3df-63e7-4bbf-96d3-fe9efa34c559.png)
 ![image](https://user-images.githubusercontent.com/51469989/211510432-dcc72317-60af-4029-842a-79b30ad416ce.png)<br>
 <tab>→ 계절에 따라 증감은 있지만 전체적으로는 증가하는 모습<br>
 <tab>→ 그렇다면 신규(혹은 복귀) 고객의 수가 많아서 매출이 증가했는가? <br>
 <br>
-- 신규(혹은 복귀) 고객의 수<br>
-<tab>→ 크게 유입되는 수가 없었음을 보여주는 그래프<br>
-<tab>→ 신규(혹은 복귀) 고객의 유입수가 없었음<br>
+⋗ 신규(혹은 복귀) 고객의 수<br>
+<img src="https://user-images.githubusercontent.com/51469989/211729119-cc1043e0-adea-4583-b851-aec161d4ffd6.png" width="60%"/>
+<img src="https://user-images.githubusercontent.com/51469989/211729343-ee4d2912-c96a-4a41-b4f7-884476f2edab.png" width="20%"/><br>
+<tab>→ 14년도 2분기의 유입 고객의 수가 제일 많은 편이지만 그마저도 141명, 총 297명으로 전체 고객수에 비해서는 매우 적은 수<br>
 <tab>→ 이는 기존 고객의 매출 기여도가 매우 높은 것으로 확인<br>
-<tab>→ 기존 고객들을 위주로 관리하면서 기업의 매출 상승을 유도하기 위한 방법 필요<br>
+<br>
+⋗ 기존고객들을 분석하기 위해 영수증으로 고객별 매출 기여도를 확인<br>
+![image](https://user-images.githubusercontent.com/51469989/211734406-22326994-b5f2-4d43-bf35-c629d442079a.png)<br>
+같은 상품을 반복 구매하는 횟수가 많은 고객의 전체 매출<br>
+![image](https://user-images.githubusercontent.com/51469989/211734791-94dacbba-8638-44a5-8d5c-375f22b58072.png)<br>
+같은 상품을 반복 구매하는 횟수가 적은 고객의 전체 매출<br>
+![image](https://user-images.githubusercontent.com/51469989/211738242-6a5da003-8a5c-4508-8efb-bff40e0d8e4d.png)<br>
+반복 구매 횟수가 적은 고객 과 많은 고객을 함게 그린 그래프
+<br>
+⋗ 그렇다면 같은 상품을 반복적으로 구매하는 것이 전체 매출에 중요한 영향을 끼치는지 확인
+
+ 
+
 <br>
 기존 고객들을 관리하면서 전체적인 매출 증대를 시킬 수 있는 방법이 뭐가 있을까 마케팅 기법을 찾아봤는데<br>
 최근 마케팅 기법 중 기존 고객에게 반복 구매적인 구매 유도가 중요시 된다는 것을 알게 됨
-
+</>
 
 
 <br>
@@ -76,7 +89,15 @@ L사의 반기별 총 매출액 + 년도별 총 매출액 <br>
 
 ## 주제 선정
 재구매율 예측 모델 생성 후 구매 물품 예측 모델 생성 및 마케팅 제안
-
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
 # 03. 데이터 분석
 ## 사용 데이터
