@@ -161,8 +161,9 @@ mljar-supervised는 테이블 형식 데이터에 작동하는 자동화된 기�
 <img src="https://user-images.githubusercontent.com/51469989/211958686-480bf1ed-8e56-4d7a-893a-92c464ac65d2.png" width="50%"><br>
 
 5. Random Forest : 0.721279 <br>
-<img src="https://user-images.githubusercontent.com/51469989/211958871-6546ae00-a5c8-4798-8581-d8124d5bd42e.png" width="50%">
 <img src="https://user-images.githubusercontent.com/51469989/211958926-0229d4a3-17cc-4fc4-abcd-d02dba0f38a2.png" width="50%">
+<img src="https://user-images.githubusercontent.com/51469989/211958871-6546ae00-a5c8-4798-8581-d8124d5bd42e.png" width="50%">
+
 <br>
 
 → 가장 성능이 좋았던 CatBoost로 테스트 진행결정
