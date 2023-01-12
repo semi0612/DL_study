@@ -48,7 +48,7 @@
 → 여기에서 반복구매. 즉, 재구매율이 중요한 것 같다는 과제 발견 <br>
 <br>
 ⋗ 실제 마케팅 기법 중 '고객 유지 마케팅(Retention Marketing)' 이라는 것이 있다는 걸 확인<br>
-<img src="https://user-images.githubusercontent.com/51469989/211989968-2b098d4c-4e38-4618-98bd-eee282627d9f.png" width="50%">
+<img src="https://user-images.githubusercontent.com/51469989/211989968-2b098d4c-4e38-4618-98bd-eee282627d9f.png" width="80%">
 <br> 
 
   
