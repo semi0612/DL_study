@@ -172,7 +172,7 @@ f1_score : 약 82% <br>
 accuracy_score : 약 85% <br>
 
 ### Feature Importance
-<img src="https://user-images.githubusercontent.com/51469989/211688348-da43b444-4a1a-4c47-8539-77a0ffd5b008.png" width="40%"> <br>
+<img src="https://user-images.githubusercontent.com/51469989/211688348-da43b444-4a1a-4c47-8539-77a0ffd5b008.png" width="60%"> <br>
 
 ## 재구매율 예측 결과
 <img src="https://user-images.githubusercontent.com/51469989/211950959-871dd810-58e1-4432-a792-75da49b2f9e2.png" width="60%"><br>
