@@ -45,6 +45,9 @@
 ⋗ 그렇다면 같은 상품을 반복적으로 구매하는 것이 전체 매출에서 어느정도의 영향을 끼치는지 확인<br>
 ![image](https://user-images.githubusercontent.com/51469989/211816666-59a817a2-4c0f-4002-8070-518c549b1fa9.png)<br>
 → 년도별 전체 매출 속 반복구매가 많은 고객들의 매출기여도는 각각 약 67.2%, 약 67.8%로 반복구매가 적은 고객들에 비하여 매우 높은 편인 것을 확인할 수 있다.<br>
+
+→ 
+
 → 여기에서 반복구매. 즉, 재구매율이 중요하다는 과제 발견<br>
 <br> 
   
@@ -100,18 +103,27 @@ mljar-supervised는 테이블 형식 데이터에 작동하는 자동화된 기�
 ![correlation_heatmap](https://user-images.githubusercontent.com/51469989/211829844-f72533d3-f60e-43ad-864f-8ee34fb0524b.png)<br>
 
 <br>
-- 학습-검증 Dataset f1-score 비교(상위 5개)<br>
+- 학습-검증 Dataset f1-score Cnfusion Marix와 Roc Curve비교(상위 5개)<br>
 1. CatBoost : 0.744486 <br>
 <img src="https://user-images.githubusercontent.com/51469989/211957795-0c518cc8-828a-4d46-b9d0-3115e38b3f9f.png" width="50%">
-<img src="https://user-images.githubusercontent.com/51469989/211957945-5c04127b-1f82-4b3c-947e-17c6913bfd95.png" width="40%"><br>
+<img src="https://user-images.githubusercontent.com/51469989/211957945-5c04127b-1f82-4b3c-947e-17c6913bfd95.png" width="50%"><br>
 2. CatBoost : 0.740299 <br>
 <img src="https://user-images.githubusercontent.com/51469989/211958020-cb8f3d53-451d-466b-ae7a-b4a771e8d320.png" width="50%">
 <img src="https://user-images.githubusercontent.com/51469989/211958094-b7240dc3-b694-44ae-8bcc-a83cbfcd2afa.png" width="50%"><br>
 
-4. LightGBM : 0.73771 <br>
-5. Xgboost : 0.729744 <br>
-6. Random Forest : 0.721279 <br> 
+3. LightGBM : 0.73771 <br>
+<img src="https://user-images.githubusercontent.com/51469989/211958581-6cf00f94-96e1-4459-899b-9e2470c94da7.png" width="50%">
+<img src="https://user-images.githubusercontent.com/51469989/211958488-2e704ad6-a2b1-4a35-8000-7a998cdb537d.png" width="50%"><br>
+
+4. Xgboost : 0.729744 <br>
+<img src="https://user-images.githubusercontent.com/51469989/211958744-358481b7-ec13-4890-a996-7e3843d807ec.png" width="50%">
+<img src="https://user-images.githubusercontent.com/51469989/211958686-480bf1ed-8e56-4d7a-893a-92c464ac65d2.png" width="50%"><br>
+
+5. Random Forest : 0.721279 <br>
+<img src="https://user-images.githubusercontent.com/51469989/211958871-6546ae00-a5c8-4798-8581-d8124d5bd42e.png" width="50%">
+<img src="https://user-images.githubusercontent.com/51469989/211958926-0229d4a3-17cc-4fc4-abcd-d02dba0f38a2.png" width="50%">
 <br>
+
 → 가장 성능이 좋았던 CatBoost로 테스트 진행결정
   
 ## Test-Dataset 결과
@@ -119,7 +131,7 @@ mljar-supervised는 테이블 형식 데이터에 작동하는 자동화된 기�
 f1_score : 약 82% <br>
 accuracy_score : 약 85% <br>
 
-## Feature Importance
+### Feature Importance
 <img src="https://user-images.githubusercontent.com/51469989/211688348-da43b444-4a1a-4c47-8539-77a0ffd5b008.png" width="40%"> <br>
 
 ## 재구매율 예측 결과
@@ -130,7 +142,7 @@ accuracy_score : 약 85% <br>
 
 # 05. INSIGHT
 ## Clustering
-### 사용 변수속성
+### 사용 변수 및 속성
 구매상품수 : 고객이 구매한 상품의 갯수<br>
 첫-마지막 : 첫구매와 마지막 구매 사이의 간격<br>
 구매건수  : 고객이 구매한 횟수(영수증 갯수)<br>
@@ -162,15 +174,22 @@ K=3으로로 군집화한 것이 K=4로 군집화 한 것보다  실루엣 계�
 → K=3으로 군집화 하기로 결정<br>
 
 ## Clustering 특성
-(군집별 비율을 보여주는 파이 그래프 같은거 하나 있으면 좋을듯)<br>
+<img src="https://user-images.githubusercontent.com/51469989/211960409-8e8f8f24-a063-4f92-be3b-47831f92fff1.png" width="50%"> <br>
+A 군집 : 6301명 (0 : 5594 명 / 1 : 707 명)<br>
+B 군집 : 6795명 (0 : 4415 명 / 1 : 2308 명)<br>
+C 군집 : 6287명 (0 : 1713 명 / 1 : 4574 명)<br>
+ <br>
+<sub> 1 : 재구매 가능성이 높게 예측된 고객</sub> <br>
+<sub> 0 : 재구매 가능성이 낮게 예측된 고객</sub>
 
 
-# 마케팅 제안
+# 06. 마케팅 제안
 ## 추천 시스템 기반
 각 군집 별 특성을 파악하여 군집 내 재구매율이 높은 고객군에서 구매 예측된 물품을 재구매율이 낮은 고객군에게 가장 효율적인 추천시스템으로 적용해보기로 했다. <br>
  
-### 물품 추천 시스템
-어떤 피처를 사용하여 어떤 모델들을 돌렸는데 각각 어떤 결과가 나와서 어떤 모델로 나온 결과를 적용했는지 추가하면 
+### 재구매 가능성이 높은 물품을 예측하는 모델
+재구매 가능성이 높게 예측된 고객들을 위주로 
+
   
 ## A 군집
 특성 : <br>
