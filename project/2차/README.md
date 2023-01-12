@@ -83,10 +83,6 @@
     <td>구매일간의 간격</td>
   </tr>
   <tr>
-    <th>days between orders</th>
-    <td>구매일간의 간격</td>
-  </tr>
-  <tr>
     <th>number of orders</th>
     <td>구매 횟수</td>
   </tr>
