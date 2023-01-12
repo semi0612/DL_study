@@ -1,5 +1,5 @@
 # 📃 장바구니 분석을 통한 재구매 물품 예측
-
+.
 <img src="https://user-images.githubusercontent.com/51469989/210502490-5881ad58-4d8c-4fea-bfce-f6d04b565e89.png" width="60%">
 
 # 01. 개요
