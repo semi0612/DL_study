@@ -145,10 +145,11 @@ mljar-supervised는 테이블 형식 데이터에 작동하는 자동화된 기�
 
 <br>
 - 학습-검증 Dataset f1-score Cnfusion Marix와 Roc Curve비교(상위 5개)<br>
-1. CatBoost : 0.744486 <br>
+1. CatBoost : 0.744486 (depth : 6) <br>
 <img src="https://user-images.githubusercontent.com/51469989/211957795-0c518cc8-828a-4d46-b9d0-3115e38b3f9f.png" width="50%">
 <img src="https://user-images.githubusercontent.com/51469989/211957945-5c04127b-1f82-4b3c-947e-17c6913bfd95.png" width="50%"><br>
-2. CatBoost : 0.740299 <br>
+
+2. CatBoost : 0.740299 (depth : 8) <br>
 <img src="https://user-images.githubusercontent.com/51469989/211958020-cb8f3d53-451d-466b-ae7a-b4a771e8d320.png" width="50%">
 <img src="https://user-images.githubusercontent.com/51469989/211958094-b7240dc3-b694-44ae-8bcc-a83cbfcd2afa.png" width="50%"><br>
 
@@ -254,13 +255,30 @@ K=3으로로 군집화한 것이 K=4로 군집화 한 것보다  실루엣 계�
 → K=3으로 군집화 하기로 결정<br>
 
 ## Clustering 특성
+- 각 군집별 전체 비율
 <img src="https://user-images.githubusercontent.com/51469989/211960409-8e8f8f24-a063-4f92-be3b-47831f92fff1.png" width="50%"> <br>
 A 군집 : 6301명 (0 : 5594 명 / 1 : 707 명)<br>
 B 군집 : 6795명 (0 : 4415 명 / 1 : 2308 명)<br>
 C 군집 : 6287명 (0 : 1713 명 / 1 : 4574 명)<br>
- <br>
 <sub> 1 : 재구매 가능성이 높게 예측된 고객</sub> <br>
-<sub> 0 : 재구매 가능성이 낮게 예측된 고객</sub>
+<sub> 0 : 재구매 가능성이 낮게 예측된 고객</sub><br>
+
+<br>
+
+- 각 군집별 AOV(AVERAGE ORDER VALUE; 주문 건수 당 평균 결제금액) 평균
+
+<img src="https://user-images.githubusercontent.com/51469989/212026245-a0ccbb71-45c4-4148-82f6-09e46d7df6de.png" width="80%"><br>
+A 군집 : AOV가 낮음 = 가격이 저렴한 것들을 자주 사는 부류<br>
+B 군집 : AOV 보통 = 보통<br>
+C 군집 : AOV가 높음 = 가격이 높아도 구매가능한 부류 <br>
+
+<br>
+
+- 각 군집별 특성 랭킹
+
+<img src="https://user-images.githubusercontent.com/51469989/212028657-f0c85463-b58c-469b-ae38-849125263d30.png" width="80%"><br>
+
+
 
 
 # 06. 마케팅 제안
@@ -397,58 +415,38 @@ Test Dataset : 2015년 4분기 데이터
 소분류의 상품 수가 3519개로 많기 때문인지 auc와 accuracy가 높게 나왔지만, f1-score가 낮게 나온것은 아쉽게 느껴진다.
 <br>
 
-- Feature Importances
+- Feature Importances <br>
 <img src="https://user-images.githubusercontent.com/51469989/211987596-30714c0b-cb81-4639-9929-386aad20ace4.png" width="50%"><br>
-  
+
+
+
+
 ## A 군집
-특성 : <br>
+- 특성
+구매간격이 짧고 구매항목 수는 많으나, 전체적인 재구매율은 낮은편<br>
+가격이 저렴한 것들을 자주 구매하는 고객군<br>
+카테고리 중 식품과 일상용품의 구매율이 높은편<br>
+
 제안 : <br>
   
 ## B 군집
-특성 : <br>
+- 특성
+구매간격과 재구매율은 보통이나, 구매항목 수가 많은편<br>
+카테고리 중 식품과 의류/패션의 구매율이 높은편<br>
+
 제안 : <br>
   
 ## C 군집
+- 특성
+구매간격의 텀이 길고 재구매율이 높으나, 구매항목 수는 적은 편<br>
+가격에 크게 영향을 받지 않는 고객군<br>
+카테고리중 식품/일상용품의 구매가 적고, 의류/패션/명품의 구매율이 높은편 <br>
 
-특성 : <br>
 제안 : <br>
-
   
   
   
   
-  
-  
-  
-### 장바구니 분석(basket analysis = 연관 분석; Association Analysis;)
-연관 규칙(association rule)은 비지도 학습¹의 하나로 대형 데이터베이스에서 변수간의 흥미로운 관계를 발견하기 위한 규칙기반 기계학습 방법이다. 연관 규칙 분석이란 대량의 정보로부터 개별 데이터 사이에서 연관규칙을 찾는 것인데, 예를 들어 마켓의 구매내역 중 특정 물건의 판매 발생 빈도를 기반으로 'A물건을 구매하는 사람들은 B물건을 함께 구매하는 경향이 있다' 라는 규칙을 찾을 수 있다. 따라서 다른말로 장바구니 분석이라고 불리기도 하는 것이다.
 
-이러한 장바구니 분석은 POS 시스템이 나타나면서 세계적으로 퍼져나갔는데, 상품 구매 예측은 물론이고, 상품 추천이나 오프라인 상의 매대진열, 사은품 또는 패키지 상품 구성등 다방면으로 적용할 수 있다는 장점이 있어 마케팅 측면으로 많이 활용되는 분석이다.
-
-연관규칙분석의 대표적인 알고리즘으로는 Apriori, FP-growth, DHP 등이 있는데 그 중 Apriori 알고리즘이 비교적 구현이 간단하고 높은 성능을 보여준다는 의견이 많아 프로젝트에 Apriori을 사용해보기로 했다.
-
-#### Apriori 알고리즘
-추천시스템의 1세대라고 할 수 있는 Apriori 알고리즘은 빈발항목집합²을 추출하는 것이 원리이다. 이해하기 쉬운 간단한 원리를 가지고 있으며 상품간의 많은 연관규칙을 발견할 수 있다는 장점이 있지만, 상품 수가 많을 수록 그 계산량이 기하급수적으로 늘어난다는 단점 역시 가지고 있다.
-<br><br>
-apriori 알고리즘을 사용법은 아래와 같다. 설정 지지도³(기본 값은 0.5, min_support 설정으로 값을 조절해줄 수 있다) 이상의 값을 가지는 연관 상품들을 얻어낼 수 있다.
-```python
-itemset = apriori(df, min_support=0.3, use_colnames=True)
-itemset
-```
-이후 association_rules를 사용하여 설정 신뢰도⁴(기본 값은 0.8, min_threshold 설정으로 값을 조절해 줄 수 있다) 이상의 값을 가지는 목록을 확인할 수 있다.
-```python
-from mlxtend.frequent_patterns import association_rules
-association_rules(itemset, metric="confidence", min_threshold=0.2)
-```
-association_rules 의 결과 값 중 lift(향상도)⁵라는 컬럼이 있는데, 이 수치가 클수록 우연히 일어나지 않았다는 표시이다. 아무런 관계가 없다면 1로 표현된다.
-
-
-<sub>¹ 비지도 학습 : 목적변수(반응변수; 종속변수; 목표변수; 출력값)에 대한 정보 없이 학습이 이루어지는 학습</sub> <br>
-<sub>² 빈발항목집합 : 최조지지도 이상을 가지는 항목집합. 모든 항목집합을 대상으로 했을 시 계산량이 복잡해질 수 있어, 최소지지도를 정한 후 그 이상의 값만 찾아 연관규칙을 생성한다. </sub> <br>
-<sub>³ 지지도 : 전체 거래에서 특정물품 A와 B가 동시에 거래되는 비중. 해당 규칙이 얼마나 의미있는지 보여준다.<br> [A와 B가 동시에 일어난 횟수 / 전체 거래 횟수]</sub> <br>
-<sub>⁴ 신뢰도 : A를 포함하는 거래 중 A와 B가 동시에 거래되는 비중.<br> [A와 B가 동시에 일어난 횟수/A가 일어난 횟수]</sub> <br>
-<sub>⁵ 향상도 : A라는 상품에서 신뢰도가 동일한 상품 B와 C가 존재할 때, 어떤 상품을 더 추천해야 좋을지 판단. <br> [A와 B가 동시에 일어난 횟수 / A, B가 독립된 사건일 때 A, B가 동시에 일어날 확률]</sub> <br>
-
-------
 
 
