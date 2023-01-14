@@ -147,6 +147,7 @@
 고객의 구매이력(영수증)을 분석하여 물품별로 구매 이력이 이어지는가 아닌가로 라벨링<br>
 이를 활용해 고객별 물품별로 구해진 재구매율을 모두 더해 전체 대비 재구매한 것의 비율을 재구매율로 삼는다.<br>
 
+❗❗❗❗(재구매율 수식 이미지 있으면 좋을 듯)
 
 ### Train Dataset
 - 2014년 ~ 2015년 3분기 데이터
@@ -170,36 +171,54 @@ mljar-supervised는 테이블 형식 데이터에 작동하는 자동화된 기�
 - mljar-supervised로 돌아간 모델의 correlation_heatmap
 ![correlation_heatmap](https://user-images.githubusercontent.com/51469989/211829844-f72533d3-f60e-43ad-864f-8ee34fb0524b.png)<br>
 
-<br>
-- 학습-검증 Dataset f1-score Cnfusion Marix와 Roc Curve비교(상위 5개)<br>
+### Train-Val 검증 Dataset
+AutoML로 학습 및 검증된 총 84개의 모델의 [Accuracy | Precision | recall | F1-score | auc] 성능을 비교하여 대체적으로 좋은 성능을 보였던 상위 5개 모델을 비교해본 모습은 아래 표와 같다. <br>
+
+<img src="https://user-images.githubusercontent.com/51469989/212470966-43840f88-f55b-4cd2-824e-81dd2578a9c0.png" width="60%"> <br><br>
+
+이 중에서 F1-Score를 중점으로 하여 깊이 6의 CatBoost로 최적화 및 학습을 재 진행하기로 하였다
+
+##### Accuracy가 아닌 F1-Score를 중점으로 모델을 선택한 이유
+먼저 우리가 사용한 재구매율을 구한 방법은 아래와 같다.<br><br>
+
+고객의 구매내역을 분석하여 각 고객이 특정 상품을 연속하여 구매했는지의 여부를 판단하여 구매내역(영수증의) 갯수만큼 (구매시 1, 비 구매시 0이라는) 라벨을 달아준 후, 전체갯수에서 1의 갯수를 나눠준 값을 재구매율로 삼고 이를 반영하였다.<br>
+
+여기에서 Accuracy가 아닌 F1-Score를 중점으로 본 이유가 나오는데. 고객이 연속해서 물건을 구매하는 경우(1)가 전체 구매 대비 매우 적은 수였기 때문에 데이터의 불균형이 일어났다고 판단하였다. 이때 만약 모델의 성능을 Accuracy로 판단한다면 모델의 성능이 실제로 좋지 못하더라도 매우 좋게 나올 수도 있었기에,<br><br>
+(예를 들어 100개의 dataset에서 90개의 데이터 라벨이 0, 10개의 데이터 라벨이 1이라고 한다면. 모델이 학습결과로 0만을 내뱉어도 정확도는 90%가 나오게 된다)<br>
+
+단순히 모델이 정답을 맞췄는가/틀렸는가를 평가지표로 삼는 Accuracy보다는 정밀도¹와 재현율²의 수치가 적절하게 조합된 평가지표인 F1-Score를 중점으로 삼는 것이 좋겠다는 결과를 도출, 따라서 F1-Score로 평가한 것이다.<br>
+
+<sub>정밀도¹(Precision) : 모델이 Positive라고 예측한 것들 중 실제 Positive였던 확률 -> TP / (TP + FP)<br>
+만약 Negative를 Positive로 오판(ex. 음성 데이터를 양성으로 잘못 판단)한다면 정밀도가 떨어지는 것이라 판단할 수 있다. </sub>
+
+<sub>재현율²(Recall) : 실제 Positive 중 모델이 Positive라고 예측한 확률 -> TP / (TP + FN)<br>
+만약 Positive를 Negative로 예측(ex.양성 데이터를 음성 데이터로 잘못 판단)한다면 재현율이 떨어지는 것이라 판단할 수 있다.</sub><br>
+
+
+##### AutoML로 선정한 top5모델의 confusion matrix와 auc 곡선 이미지 비교
 1. CatBoost : 0.744486 (depth : 6) <br>
 <img src="https://user-images.githubusercontent.com/51469989/211957795-0c518cc8-828a-4d46-b9d0-3115e38b3f9f.png" width="50%">
-<img src="https://user-images.githubusercontent.com/51469989/211957945-5c04127b-1f82-4b3c-947e-17c6913bfd95.png" width="50%"><br>
+<img src="https://user-images.githubusercontent.com/51469989/211957945-5c04127b-1f82-4b3c-947e-17c6913bfd95.png" width="50%"><br><br>
 
 2. CatBoost : 0.740299 (depth : 8) <br>
 <img src="https://user-images.githubusercontent.com/51469989/211958020-cb8f3d53-451d-466b-ae7a-b4a771e8d320.png" width="50%">
-<img src="https://user-images.githubusercontent.com/51469989/211958094-b7240dc3-b694-44ae-8bcc-a83cbfcd2afa.png" width="50%"><br>
+<img src="https://user-images.githubusercontent.com/51469989/211958094-b7240dc3-b694-44ae-8bcc-a83cbfcd2afa.png" width="50%"><br><br>
 
 3. LightGBM : 0.73771 <br>
 <img src="https://user-images.githubusercontent.com/51469989/211958581-6cf00f94-96e1-4459-899b-9e2470c94da7.png" width="50%">
-<img src="https://user-images.githubusercontent.com/51469989/211958488-2e704ad6-a2b1-4a35-8000-7a998cdb537d.png" width="50%"><br>
+<img src="https://user-images.githubusercontent.com/51469989/211958488-2e704ad6-a2b1-4a35-8000-7a998cdb537d.png" width="50%"><br><br>
 
 4. Xgboost : 0.729744 <br>
 <img src="https://user-images.githubusercontent.com/51469989/211958744-358481b7-ec13-4890-a996-7e3843d807ec.png" width="50%">
-<img src="https://user-images.githubusercontent.com/51469989/211958686-480bf1ed-8e56-4d7a-893a-92c464ac65d2.png" width="50%"><br>
+<img src="https://user-images.githubusercontent.com/51469989/211958686-480bf1ed-8e56-4d7a-893a-92c464ac65d2.png" width="50%"><br><br>
 
 5. Random Forest : 0.721279 <br>
 <img src="https://user-images.githubusercontent.com/51469989/211958926-0229d4a3-17cc-4fc4-abcd-d02dba0f38a2.png" width="50%">
-<img src="https://user-images.githubusercontent.com/51469989/211958871-6546ae00-a5c8-4798-8581-d8124d5bd42e.png" width="50%">
-
-<br>
-
-→ 가장 성능이 좋았던 CatBoost로 테스트 진행결정
+<img src="https://user-images.githubusercontent.com/51469989/211958871-6546ae00-a5c8-4798-8581-d8124d5bd42e.png" width="50%"><br><br>
   
-## Test-Dataset 결과
+## 최적화 후 Train-Val, Test 결과
 <img src="https://user-images.githubusercontent.com/51469989/211951684-a636c369-8843-4d9d-8599-2f1e999b470d.png" width="60%"> <br>
-f1_score : 약 82% <br>
-accuracy_score : 약 85% <br>
+f1_score 약 82% , accuracy_score는 약 85% 의 결과가 도출되었다.
 
 ### Feature Importance
 <img src="https://user-images.githubusercontent.com/51469989/211688348-da43b444-4a1a-4c47-8539-77a0ffd5b008.png" width="60%"> <br>
@@ -208,7 +227,7 @@ accuracy_score : 약 85% <br>
 <img src="https://user-images.githubusercontent.com/51469989/211950959-871dd810-58e1-4432-a792-75da49b2f9e2.png" width="60%"><br>
 → 추후 재구매율이 낮은 고객 9691명 <br>
   추후 재구매율이 높은 고객 9692명
-
+❗❗❗❗❗ 수정 필
 
 # 05. INSIGHT
 ## Clustering
