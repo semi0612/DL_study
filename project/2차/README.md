@@ -176,9 +176,9 @@ AutoML로 학습 및 검증된 총 84개의 모델의 [Accuracy | Precision | re
 
 <img src="https://user-images.githubusercontent.com/51469989/212470966-43840f88-f55b-4cd2-824e-81dd2578a9c0.png" width="60%"> <br><br>
 
-이 중에서 F1-Score를 중점으로 하여 깊이 6의 CatBoost로 최적화 및 학습을 재 진행하기로 하였다
+이 중에서 F1-Score를 중점으로 하여 깊이 6의 CatBoost로 최적화 후 학습을 재진행하기로 하였다
 
-##### Accuracy가 아닌 F1-Score를 중점으로 모델을 선택한 이유
+#### Accuracy가 아닌 F1-Score를 중점으로 모델을 선택한 이유
 먼저 우리가 사용한 재구매율을 구한 방법은 아래와 같다.<br><br>
 
 고객의 구매내역을 분석하여 각 고객이 특정 상품을 연속하여 구매했는지의 여부를 판단하여 구매내역(영수증의) 갯수만큼 (구매시 1, 비 구매시 0이라는) 라벨을 달아준 후, 전체갯수에서 1의 갯수를 나눠준 값을 재구매율로 삼고 이를 반영하였다.<br>
@@ -195,29 +195,40 @@ AutoML로 학습 및 검증된 총 84개의 모델의 [Accuracy | Precision | re
 만약 Positive를 Negative로 예측(ex.양성 데이터를 음성 데이터로 잘못 판단)한다면 재현율이 떨어지는 것이라 판단할 수 있다.</sub><br>
 
 
-##### AutoML로 선정한 top5모델의 confusion matrix와 auc 곡선 이미지 비교
-1. CatBoost : 0.744486 (depth : 6) <br>
-<img src="https://user-images.githubusercontent.com/51469989/211957795-0c518cc8-828a-4d46-b9d0-3115e38b3f9f.png" width="50%">
-<img src="https://user-images.githubusercontent.com/51469989/211957945-5c04127b-1f82-4b3c-947e-17c6913bfd95.png" width="50%"><br><br>
+#### AutoML로 선정한 top5모델의 confusion matrix와 auc 곡선 이미지 비교(+ 모델특징
+1. CatBoost (depth : 6) <br>
+ - 범주형 변수의 예측모델에 최적화된 모델(범주형 데이터를 처리하는 새로운 방법 제시)
+ - 다른 GBM에 비해 과적합 적다 / 범주형 변수에 대해 모델의 정확도&속도 높다 / encoding 작업 없이 모델의 input 가능<br>
+ 
+![image](https://user-images.githubusercontent.com/51469989/212472957-78c11360-ca2f-4824-b951-330a82a3da6a.png)
+![image](https://user-images.githubusercontent.com/51469989/212472967-44f68a1c-dd12-45d5-8de9-24e15bda8538.png)<br><br>
 
-2. CatBoost : 0.740299 (depth : 8) <br>
-<img src="https://user-images.githubusercontent.com/51469989/211958020-cb8f3d53-451d-466b-ae7a-b4a771e8d320.png" width="50%">
-<img src="https://user-images.githubusercontent.com/51469989/211958094-b7240dc3-b694-44ae-8bcc-a83cbfcd2afa.png" width="50%"><br><br>
+2. CatBoost (depth : 8) <br>
+![image](https://user-images.githubusercontent.com/51469989/212473007-f3e6a6a4-aec3-4ac4-9294-61571d34e029.png)
+![image](https://user-images.githubusercontent.com/51469989/212473012-e62596fb-1b29-4ecd-9af9-bfed1de9709b.png)<br><br>
 
-3. LightGBM : 0.73771 <br>
-<img src="https://user-images.githubusercontent.com/51469989/211958581-6cf00f94-96e1-4459-899b-9e2470c94da7.png" width="50%">
-<img src="https://user-images.githubusercontent.com/51469989/211958488-2e704ad6-a2b1-4a35-8000-7a998cdb537d.png" width="50%"><br><br>
+3. LightGBM <br>
+- XGBoost보다 학습시간&메모리 사용량 적다 / 기능성의 다양성도 더 많다
+ - 카테고리형 피처의 자동 변환이 가능하고 최적 분할이 가능<br>
+![image](https://user-images.githubusercontent.com/51469989/212473017-7b2cf750-89fc-48b1-bd84-742cb05e1aff.png)
+![image](https://user-images.githubusercontent.com/51469989/212473022-faf0cf5d-54ed-4852-a368-3184e08f25b4.png)<br><br>
 
-4. Xgboost : 0.729744 <br>
-<img src="https://user-images.githubusercontent.com/51469989/211958744-358481b7-ec13-4890-a996-7e3843d807ec.png" width="50%">
-<img src="https://user-images.githubusercontent.com/51469989/211958686-480bf1ed-8e56-4d7a-893a-92c464ac65d2.png" width="50%"><br><br>
+4. Xgboost <br>
+- 트리 기반의 앙상블 학습모델<br>
+- 뛰어난 예측 성능 / GBM 대비 빠른 수행시간 / 과적합 규제 기능 / 결손값 자체 처리<br>
+![image](https://user-images.githubusercontent.com/51469989/212473029-3578fa37-727e-49c6-9fbd-fbff1d018f03.png)
+![image](https://user-images.githubusercontent.com/51469989/212473032-c92f7740-9492-46b2-84a1-ec9b6fe9aaa5.png)<br><br>
 
-5. Random Forest : 0.721279 <br>
-<img src="https://user-images.githubusercontent.com/51469989/211958926-0229d4a3-17cc-4fc4-abcd-d02dba0f38a2.png" width="50%">
-<img src="https://user-images.githubusercontent.com/51469989/211958871-6546ae00-a5c8-4798-8581-d8124d5bd42e.png" width="50%"><br><br>
+
+5. Random Forest <br>
+- 과대 적합(overfitting) 을 방지하기 위해, 최적의 기준 변수를 랜덤하게 선택<br>
+ - 일반화 및 성능 우수 / 파라미터 조정 용이 / scale 변환 불필요 / 과적합 잘 안된다
+![image](https://user-images.githubusercontent.com/51469989/212473034-e211264b-2ae3-4159-a373-7aa9b915b77f.png)
+![image](https://user-images.githubusercontent.com/51469989/212473038-a2f8affb-fd65-42e8-be7f-f75625adbe80.png)<br><br>
+
   
 ## 최적화 후 Train-Val, Test 결과
-<img src="https://user-images.githubusercontent.com/51469989/211951684-a636c369-8843-4d9d-8599-2f1e999b470d.png" width="60%"> <br>
+<img src="https://user-images.githubusercontent.com/51469989/211951684-a636c369-8843-4d9d-8599-2f1e999b470d.png" width="40%"> <br>
 f1_score 약 82% , accuracy_score는 약 85% 의 결과가 도출되었다.
 
 ### Feature Importance
@@ -228,6 +239,7 @@ f1_score 약 82% , accuracy_score는 약 85% 의 결과가 도출되었다.
 → 추후 재구매율이 낮은 고객 9691명 <br>
   추후 재구매율이 높은 고객 9692명
 ❗❗❗❗❗ 수정 필
+
 
 # 05. INSIGHT
 ## Clustering
@@ -466,9 +478,13 @@ Test Dataset : 2015년 4분기 데이터
 - LightGBM <br>
 
 → 모델간의 correlation_heatmap <br>
-<img src="https://user-images.githubusercontent.com/51469989/211970391-0bdee485-f745-4f5d-b10c-605b1435c9eb.png" width="50%"><br>
+<img src="https://user-images.githubusercontent.com/51469989/211970391-0bdee485-f745-4f5d-b10c-605b1435c9eb.png" width="50%"><br><br>
 
-→ 가장 f1_score가 높은 LightGBM으로 테스트 진행 결정 <br>
+→ 모델들의 f1-Score 결과<br>
+![image](https://user-images.githubusercontent.com/51469989/212474770-eb20784e-112c-45cd-ab1e-55e95f42f2b6.png)<br><br>
+
+→ 가장 f1_score가 높게나온 LightGBM으로 최적화(learning_rate = 0.5, num_leaves = 15) 후 학습을 재진행하기로 결정하였다.<br>
+
 - Test-Accuracy score <br>
 <table>
   <tr>
@@ -485,7 +501,7 @@ Test Dataset : 2015년 4분기 데이터
   </tr>
 </table>
 <br>
-소분류의 상품 수가 3519개로 많기 때문인지 auc와 accuracy가 높게 나왔지만, f1-score가 낮게 나온것은 아쉽게 느껴진다.
+한계점 : 구매내역(행)의 수가 너무 많아 사용하는 Colab환경 내 RAM과 런타임으로는 복잡한 모델에서는 학습진행 및 결과 도출에 있어 문제가 발생하였다. 따라서 DecisionTree, LightGBM 추가적으로 Logistic까지, 비교적 간단한 모델로 학습을 진행할 수 밖에 없었다. 그러한 상황에서 맞춰야할 정답 레이블인 소분류의 상품 수가 3519개로 많아 Score가 낮게 나온 것 같아 아쉬움이 남는다..
 <br>
 
 - Feature Importances <br>
@@ -525,3 +541,7 @@ Test Dataset : 2015년 4분기 데이터
 <br>
 - 연관규칙분석 알고리즘인 Apriori를 활용하여 분석된 물품을 활용하여 고객별 맞춤 추천 서비스 제공
 - 가격 민감도가 낮고 명품의 구매율도 높은 편이기 때문에 사치품에 대한 마케팅을 진행
+
+
+## 기대효과
+해당 마케팅제안으로 재구매율이 10% 상승함을 가정한다면, 최종 예상 매출은 2년간 전체매출 대비 2-3% 증가할 것으로 예상된다. 이는 만약 매출 증가액이 2.5%라고 가정한다면 약 169,254,789,000원(천육백구십이억 오천사백칠십팔만 구천원)의 추가 매출을 기대해 볼 수 있다는 것이다.
