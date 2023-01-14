@@ -51,7 +51,13 @@
 ![성별_연령별_매출비교](https://user-images.githubusercontent.com/51469989/212464359-0d54d532-ce46-4c21-90cb-f6b3dd2549cc.png)
 ![성별_연령별_매출비교_2](https://user-images.githubusercontent.com/51469989/212464353-efb5f78e-1a3e-48dc-8eab-3a6ec301e4ec.png) <br>
 → 남성고객의 경우에는 35세부터 39세의 고객군이 일순위이며, 45세 49세 고객군과 40세부터 44세의 고객군 순서로 매출액이 많은 모습<br>
-→ 여성고객의 경우에는 45세부터 49세의 고객군이 가장 많았으며, 순서대로 40세부터 44세의의 고객군과 50세부터 54세의 고객군이 그 뒤를 이었다.<br>
+→ 여성고객의 경우에는 45세부터 49세의 고객군이 가장 많았으며, 순서대로 40세부터 44세의의 고객군과 50세부터 54세의 고객군이 그 뒤를 이었다.<br><br>
+
+⋗ 2014년 카테고리별 매출 기여도<br>
+![2014년 매출기여도](https://user-images.githubusercontent.com/51469989/212477691-84ab0e5b-ea27-46da-a4ba-ea73cd2caf64.png)<br><br>
+
+⋗ 2015년 카테고리별 매출 기여도<br>
+![2015년 매출기여도](https://user-images.githubusercontent.com/51469989/212477720-4aba2492-9f9c-45d9-b006-c41387d69217.png)<br><br>
 
 ⋗ L사의 반기별 총 매출액 + 년도별 총 매출액 <br>
 ![image](https://user-images.githubusercontent.com/51469989/211510762-4a79a3df-63e7-4bbf-96d3-fe9efa34c559.png)
@@ -279,7 +285,7 @@ f1_score 약 82% , accuracy_score는 약 85% 의 결과가 도출되었다.
   </tr>
   <tr>
     <th>총구매금액</th>
-    <td고객의 총 구매금액</td>
+    <td>고객의 총 구매금액</td>
   </tr>
   <tr>
     <th>총영수증개수</th>
@@ -481,9 +487,8 @@ Test Dataset : 2015년 4분기 데이터
 <img src="https://user-images.githubusercontent.com/51469989/211970391-0bdee485-f745-4f5d-b10c-605b1435c9eb.png" width="50%"><br><br>
 
 → 모델들의 f1-Score 결과<br>
-![image](https://user-images.githubusercontent.com/51469989/212474770-eb20784e-112c-45cd-ab1e-55e95f42f2b6.png)<br><br>
-
-→ 가장 f1_score가 높게나온 LightGBM으로 최적화(learning_rate = 0.5, num_leaves = 15) 후 학습을 재진행하기로 결정하였다.<br>
+![image](https://user-images.githubusercontent.com/51469989/212474770-eb20784e-112c-45cd-ab1e-55e95f42f2b6.png)<br>
+→ 가장 f1_score가 높게나온 LightGBM으로 최적화(learning_rate = 0.5, num_leaves = 15) 후 학습을 재진행하기로 결정하였다.<br><br>
 
 - Test-Accuracy score <br>
 <table>
@@ -501,8 +506,8 @@ Test Dataset : 2015년 4분기 데이터
   </tr>
 </table>
 <br>
-한계점 : 구매내역(행)의 수가 너무 많아 사용하는 Colab환경 내 RAM과 런타임으로는 복잡한 모델에서는 학습진행 및 결과 도출에 있어 문제가 발생하였다. 따라서 DecisionTree, LightGBM 추가적으로 Logistic까지, 비교적 간단한 모델로 학습을 진행할 수 밖에 없었다. 그러한 상황에서 맞춰야할 정답 레이블인 소분류의 상품 수가 3519개로 많아 Score가 낮게 나온 것 같아 아쉬움이 남는다..
-<br>
+한계점 : 구매내역(행)의 수가 너무 많아 사용하는 Colab환경 내 RAM과 런타임으로는 복잡한 모델에서는 학습진행 및 결과 도출에 있어 문제가 발생하였다. 따라서 DecisionTree, LightGBM 추가적으로 Logistic까지, 비교적 간단한 모델로 학습을 진행할 수 밖에 없었다. 그러한 상황에서 맞춰야할 정답 레이블인 소분류의 상품 수가 3519개로 많아 Score가 낮게 나온 것 같아 아쉬움이 남는다.
+<br><br>
 
 - Feature Importances <br>
 <img src="https://user-images.githubusercontent.com/51469989/211987596-30714c0b-cb81-4639-9929-386aad20ace4.png" width="50%"><br>
@@ -544,4 +549,7 @@ Test Dataset : 2015년 4분기 데이터
 
 
 ## 기대효과
-해당 마케팅제안으로 재구매율이 10% 상승함을 가정한다면, 최종 예상 매출은 2년간 전체매출 대비 2-3% 증가할 것으로 예상된다. 이는 만약 매출 증가액이 2.5%라고 가정한다면 약 169,254,789,000원(천육백구십이억 오천사백칠십팔만 구천원)의 추가 매출을 기대해 볼 수 있다는 것이다.
+<br>
+어떤식으로 구했는지 추가
+<br>
+해당 마케팅제안으로 재구매율이 10% 상승함을 가정한다면, 최종 예상 매출은 2년간 전체매출 대비 2-3% 증가할 것으로 계산되었다. 이는 만약 매출 증가액이 2.5%라고 가정한다면 약 169,254,789,000원(천육백구십이억 오천사백칠십팔만 구천원)의 추가 매출을 기대해 볼 수 있다는 것이다.
