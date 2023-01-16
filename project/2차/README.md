@@ -1,6 +1,6 @@
 # 📃 재구매율 예측을 통한 구매물품 예측 및 솔루션 제안
-.
-<img src="https://user-images.githubusercontent.com/51469989/210502490-5881ad58-4d8c-4fea-bfce-f6d04b565e89.png" width="60%">
+
+<img src="https://user-images.githubusercontent.com/51469989/212594358-4afea532-b486-4175-9d00-db8cb54faf20.png" width="60%">
 
 # 01. 개요
 ## 자료구성
@@ -8,16 +8,18 @@
 - 제공범위(Scope of Offer) : L그룹 4개 계열사의 구매이력(계열사 정보 비공개), 고객 성향을 파악할 수 있는 데이터 제공
 
 ## 사용 모듈
-- Google Colab
-- mljar-supervised 패키지
+- Google Colab <br>
+- mljar <br>
+- supervised <br>
 
 ## 주어진 사용 데이터 목록 및 컬럼내역
 - 구매내역 정보 : 제휴사(ABCD)/영수증번호/대분류코드/중분류코드/소분류코드/고객번호/점포코드/구매일자/구매시간/구매금액
 - 채널(온/오프라인) 이용 : 2015년 10월 ~ 12월. 총 3개월치
 - 경쟁사 이용 : L사 4개 계열사 별 경쟁사 이용년월 정보
 - 멤버십여부 : 멤버십에 가입한 고객 
-- 데모(고객정보) : 20341개
-- 상품분류 : 4386개<br>
+- 데모(고객정보) : 20341개의 고객정보
+- 상품분류 : 대분류, 중분류, 소분류로 나뉘어진 상품 분류 중 소분류 데이터 사용 / 4386개
+<br>
 → 고객의 구매 패턴 파악을 위해 고객과 중심 데이터로 정리 및 가공<br>
 
 ## 데이터 가공 및 정리 목록
@@ -41,11 +43,11 @@
 ## EDA(Exploratory Data Analysis, 탐색적 데이터 분석)
 ⋗ 고객 성별 매출 비교 <br>
 ![성별_매출_비교](https://user-images.githubusercontent.com/51469989/212464317-4d828dbe-df90-42a4-aec5-f5fa56830ce4.png) <br>
-→ 남성에 비해 여성고객에게서 나온 매출액이 압도적으로 많은 모습 <br><br>
+→ 남성에 비해 여성고객에게서 나온 매출액이 압도적으로 높은 모습 <br><br>
  
 ⋗ 연령별 매출 비교<br>
 ![KakaoTalk_20230113_170409050_01](https://user-images.githubusercontent.com/51469989/212464632-28b62a7e-5a0d-4a5f-97e7-e316a5612ce4.png)<br>
-→ 45세부터 49세사이의 고객군이 가장 높은 순위. 뒤를 이어 40세부터 44세의 고객군과 50세부터 54세의 고객군 순으로 높은 모습 <br><br>
+→ 40대 고객의 매출액이 높은 편이며, 연령대가 높을 수록 매출액도 큰 편 <br><br>
 
 ⋗ 성별_연령별 매출 비교<br>
 ![성별_연령별_매출비교](https://user-images.githubusercontent.com/51469989/212464359-0d54d532-ce46-4c21-90cb-f6b3dd2549cc.png)
@@ -54,17 +56,23 @@
 → 여성고객의 경우에는 45세부터 49세의 고객군이 가장 많았으며, 순서대로 40세부터 44세의의 고객군과 50세부터 54세의 고객군이 그 뒤를 이었다.<br><br>
 
 ⋗ 2014년 카테고리별 매출 기여도<br>
-![2014년 매출기여도](https://user-images.githubusercontent.com/51469989/212477691-84ab0e5b-ea27-46da-a4ba-ea73cd2caf64.png)<br><br>
+![2014년 매출기여도](https://user-images.githubusercontent.com/51469989/212477691-84ab0e5b-ea27-46da-a4ba-ea73cd2caf64.png)<br>
+→ 2014년 카테고리별 매출 기여도는 의류 34.41%, 가공식품 48.87% 순으로 높았으며 의약품 및 의료기기 항목이 가장 낮은 기여도
+<br><br>
+
 
 ⋗ 2015년 카테고리별 매출 기여도<br>
-![2015년 매출기여도](https://user-images.githubusercontent.com/51469989/212477720-4aba2492-9f9c-45d9-b006-c41387d69217.png)<br><br>
+![2015년 매출기여도](https://user-images.githubusercontent.com/51469989/212477720-4aba2492-9f9c-45d9-b006-c41387d69217.png)<br>
+→ 2015년의 카테고리별 매출 기여도 역시 의류 32.96%, 가공식품 46.74% 순으로 높았으며 의약품 및 의료기기의 항목이 가장 낮은 기여도<br>
+→ 14년에는 매출 기여도 5순위였던 명품 항목이 15년에는 3순위로 변경 되었다는 점이 특징<br>
+<br><br>
 
 ⋗ L사의 반기별 총 매출액 + 년도별 총 매출액 <br>
 ![image](https://user-images.githubusercontent.com/51469989/211510762-4a79a3df-63e7-4bbf-96d3-fe9efa34c559.png)
 ![image](https://user-images.githubusercontent.com/51469989/211510432-dcc72317-60af-4029-842a-79b30ad416ce.png)<br>
 → 계절에 따라 증감은 있지만 전체적으로는 증가하는 모습<br>
-→ 그렇다면 신규 고객의 수가 많아서 매출이 증가했는가? <br>
-<br>
+→ 그렇다면 신규 고객의 수가 많아서 매출이 증가했는가? <br><br>
+
 ⋗ 신규 고객의 수<br>
 <img src="https://user-images.githubusercontent.com/51469989/211729119-cc1043e0-adea-4583-b851-aec161d4ffd6.png" width="60%"/>
 <img src="https://user-images.githubusercontent.com/51469989/211729343-ee4d2912-c96a-4a41-b4f7-884476f2edab.png" width="20%"/><br>
@@ -91,7 +99,7 @@
 
   
 ## 주제 선정
-재구매율 예측 모델 생성 후 예측된 재구매율을 활용하여 구매 물품 예측 모델 생성 및 마케팅 제안<br> 
+재구매율 예측을 통한 구매물품 예측 및 솔루션 제안<br> 
 <br> 
   
 ## 분석 과제
@@ -150,9 +158,9 @@
 
   
 ### 재구매율이란
-<img src="https://user-images.githubusercontent.com/51469989/212477483-90203139-6d6d-40ee-a7af-d276804989d6.png" width="40%"><br>
-고객의 구매이력(영수증)을 분석하여 물품별로 구매 이력이 이어지는가 아닌가로 라벨링한 <br>
-이를 활용해 고객별 물품별로 구해진 재구매율을 모두 더해 전체 대비 재구매한 것의 비율을 재구매율로 삼는다.<br>
+![image](https://user-images.githubusercontent.com/51469989/212595260-713f7ee7-69ab-42e1-8aa2-7f105940230a.png)<br>
+→ 원래 재구매율의 정의 : 제품을 구매한 고객이 다시 해당 쇼핑몰을 찾아 구매하는 <br>
+→ 이를 조금 더 상세하게 상품별로 분석해 보기 위하여 고객의 구매이력을 분석, 해당상품의 구매이력이 연속적으로 이어지는 지 아닌지로 영수증 마다 0과 1을 라벨링 한 뒤 이를 활용하여 고객별 물품으로 각각 구해진 재구매율을 모두 더한 후 전체 대비 재구매 라벨링 된 것의 비율을 재구매율로 삼았다.br>
 
 
 
@@ -212,7 +220,8 @@ AutoML로 학습 및 검증된 총 84개의 모델의 [Accuracy | Precision | re
 ![image](https://user-images.githubusercontent.com/51469989/212472967-44f68a1c-dd12-45d5-8de9-24e15bda8538.png)<br><br>
 
 2. CatBoost (depth : 8) <br>
-![image](https://user-images.githubusercontent.com/51469989/212473007-f3e6a6a4-aec3-4ac4-9294-61571d34e029.png)
+<img src="https://user-images.githubusercontent.com/51469989/212596376-dd3f0643-0727-4987-85b6-012c1d4dc247.png" width="60%">
+
 ![image](https://user-images.githubusercontent.com/51469989/212473012-e62596fb-1b29-4ecd-9af9-bfed1de9709b.png)<br><br>
 
 3. LightGBM <br>
@@ -242,9 +251,10 @@ f1_score 약 82% , accuracy_score는 약 85% 의 결과가 도출되었다.
 ### Feature Importance
 <img src="https://user-images.githubusercontent.com/51469989/211688348-da43b444-4a1a-4c47-8539-77a0ffd5b008.png" width="60%"> <br>
 
+
 ## 재구매율 예측 결과
-→ 추후 재구매율이 낮은 고객 7,589명 <br>
-  추후 재구매율이 높은 고객 11,722명
+→ 추후 예측 재구매율이 낮은 고객 11,722명 <br>
+→ 추후 예측 재구매율이 높은 고객 7,89명
 
 
 # 05. INSIGHT
@@ -303,6 +313,11 @@ f1_score 약 82% , accuracy_score는 약 85% 의 결과가 도출되었다.
 <br>
 → 위와 같은 중요변수 12개를 추출하여 군집화 진행<br>
 
+### Clustering을 위하여 사용한 모델
+![image](https://user-images.githubusercontent.com/51469989/212595835-720ace35-b5b5-4302-be51-29f1f782bcf1.png)
+→ 이 중 적은 군집 수로도 고른 분포를 가지며 평균 실루엣 점수 역시 0.75로 높은 모습을 보인 K-Means로 군집화를 이어 진행하기로 함
+
+
 ### Elbow-Method
 최적의 군집 수를 구하기 위해 사용<br>
 ![엘보](https://user-images.githubusercontent.com/51469989/211835206-b1906cc7-35bc-455a-b3f9-cad3fe7d4ece.png)<br>
@@ -320,14 +335,15 @@ K=3으로로 군집화한 것이 K=4로 군집화 한 것보다 데이터 포인
 
 ## Clustering 특성
 - 각 군집별 전체 비율
-<img src="https://user-images.githubusercontent.com/51469989/211960409-8e8f8f24-a063-4f92-be3b-47831f92fff1.png" width="50%"> <br>
+<img src="https://user-images.githubusercontent.com/51469989/211960409-8e8f8f24-a063-4f92-be3b-47831f92fff1.png" width="40%"> <br>
 A 군집 : 6301명 (0 : 5594 명 / 1 : 707 명)<br>
 B 군집 : 6795명 (0 : 4415 명 / 1 : 2308 명)<br>
 C 군집 : 6287명 (0 : 1713 명 / 1 : 4574 명)<br>
 <sub> 1 : 재구매 가능성이 높게 예측된 고객</sub> <br>
 <sub> 0 : 재구매 가능성이 낮게 예측된 고객</sub><br>
-
 <br>
+
+<img src="https://user-images.githubusercontent.com/51469989/212596164-fd1e54e8-5263-4c36-8b2f-51d61ff46089.png" width="80%">
 
 - 각 군집별 AOV(AVERAGE ORDER VALUE; 주문 건수 당 평균 결제금액) 평균
 
@@ -337,10 +353,6 @@ B 군집 : AOV 보통 = 보통<br>
 C 군집 : AOV가 높음 = 가격이 높아도 구매가능한 부류 <br>
 
 <br>
-
-- 각 군집별 특성 랭킹
-
-<img src="https://user-images.githubusercontent.com/51469989/212028657-f0c85463-b58c-469b-ae38-849125263d30.png" width="80%"><br>
 
 ## 각 군집별 특성 분석
 ### A 군집
@@ -499,10 +511,10 @@ Test Dataset : 2015년 4분기 데이터
     <th>precision</th>
   </tr>
   <tr>
-    <td>약 0.82</td>
-    <td>약 0.94</td>
-    <td>약 0.14</td>
-    <td>약 0.67</td>
+    <td>약 0.651</td>
+    <td>약 0.913</td>
+    <td>약 0.351</td>
+    <td>약 0.354</td>
   </tr>
 </table>
 <br>
