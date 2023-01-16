@@ -37,7 +37,7 @@
 같은 상품임에도 가방, 가방브랜드, 핸드백 등으로 분리가 되어있는 것을 발견. 물품군을 확실히 하기 위하여 유통상품지식뱅크의 상품 분류 기준을 따라 분류<br>
 
 ⋗ 중분류명 수정 및 데이터 반영 <br>
-<img src="https://user-images.githubusercontent.com/51469989/212467218-1368459b-382e-41df-abd1-922eeebb75c7.png" width="60%"><br><br>
+<img src="https://user-images.githubusercontent.com/51469989/212467218-1368459b-382e-41df-abd1-922eeebb75c7.png" width="35%"><br><br>
 
 # 02. 주제 선정
 ## EDA(Exploratory Data Analysis, 탐색적 데이터 분석)
