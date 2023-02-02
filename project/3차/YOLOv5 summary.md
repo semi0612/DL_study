@@ -13,7 +13,7 @@
 
 
 ### Characteristics
-yolov5의 특징이라고 하면 Yolov5s(=small), Yolov5m(medium), YOlov5l(large), Yolov5x(xlarge) 와 같이 크기별로 나눠서 사용이 가능하다는 것이다.
+yolov5의 특징이라고 하면 Yolov5s(=small), Yolov5m(=medium), YOlov5l(=large), Yolov5x(=xlarge) 와 같이 크기별로 나눠서 사용이 가능하다는 것이다.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/51469989/216218596-7351c43e-6e36-4dfb-ac98-407c19620e1a.png">
