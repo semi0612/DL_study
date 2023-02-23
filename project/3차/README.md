@@ -46,4 +46,4 @@ X-ray 검사 상의 보이는 나이를 뜻하며 골 성숙도를 나타내는 
 ![image](https://user-images.githubusercontent.com/51469989/220564580-3fe40f7d-b8dc-4915-b2bb-8338c31df5a2.png)<br>
 
 ### GUI
-예측된 골연령과 예측 신장 정보를 쉽게 이용해볼 수 있게끔 PyQT를 활용하여 GUI를 구성하였다.
+골연령과 신장 예측 정보를 쉽게 사용해볼 수 있게끔 PyQT를 활용하여 GUI를 구성
