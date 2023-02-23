@@ -3,7 +3,7 @@
 ### 참고 논문
 * [YOLO (You Only Look Once: Unified, Real-Time Object Detection)](https://github.com/semi0612/CNN_paper/blob/master/Reading/YOLO.md)
 * [YOLOv5 Summary](https://github.com/semi0612/study/blob/main/project/3%EC%B0%A8/YOLOv5%20summary.md)
-* [TJNet]()
+* [TJNet](https://github.com/semi0612/paper/blob/master/Reading/TJNet.md)
 
 ![image](https://user-images.githubusercontent.com/51469989/220557718-df7d92e2-1b27-40ee-b794-9dbe6c07e3e4.png)
 
