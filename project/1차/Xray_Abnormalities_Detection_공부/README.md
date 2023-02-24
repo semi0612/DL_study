@@ -1,6 +1,6 @@
 # Chest X-ray Abnormalities Detection
 
-- Colab, Jupyter lab에서 실험을 진행하였습니다
+- Colab, Jupyter lab에서 공부 진행
 - 이 대회는 Vingroup Big Data Institute가 VinBigData의 웹 기반 플랫폼인 VinLab을 통해 수집한 이미지를 통해 기초 연구를 촉진하여 새롭고 적용 가능성이 높은 기술 조사를 목표로 한 대회이며, Kaggle Web Site를 통하여 데이터를 제공받았습니다.
 - url : [https://www.kaggle.com/competitions/vinbigdata-chest-xray-abnormalities-detection/overview](https://www.kaggle.com/competitions/vinbigdata-chest-xray-abnormalities-detection/overview)
 
